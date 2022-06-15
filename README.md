@@ -23,6 +23,9 @@ Requester는 쉽게 말하면 고용자, Creator는 노동자라고 풀이할 �
 플랫폼 내부적으로는 아래와 같이 나눠집니다.
 ![](https://velog.velcdn.com/images/songs4805/post/683a118b-9144-4b12-b68e-e6efb99f20dc/image.png)
 
+4. Service Structure
+![](https://velog.velcdn.com/images/songs4805/post/d6e2b836-ff45-4b16-8d68-e4344be1e971/image.png)
+
 
 # 기술 스택
 Backend 프로젝트에서의 기술 스택은 다음과 같습니다.
