@@ -20,7 +20,7 @@ import static me.ramos.WaitForm.global.result.ResultCode.LIKE_BOARD_SUCCESS;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/board")
+@RequestMapping("/boards")
 public class BoardController {
 
     private final BoardService boardService;
@@ -32,7 +32,7 @@ public class BoardController {
                 @ApiResponse(responseCode = "404", description = "회원 정보가 없습니다.")
         }
     )
-    @PostMapping("/upload")
+    @PostMapping
     public ResponseEntity<ResultResponse> upload(@Valid @RequestBody BoardEnrollRequestDto requestDto) throws Exception {
         BoardResponseDto response = boardService.upload(requestDto);
         ResultResponse result = ResultResponse.of(ResultCode.BOARD_ENROLL_SUCCESS, response);
@@ -61,7 +61,7 @@ public class BoardController {
                     @ApiResponse(responseCode = "404", description = "board not exist.")
             }
     )
-    @GetMapping("/me/list")
+    @GetMapping("/me")
     public ResponseEntity<ResultResponse> findAllMyBoards() {
         List<BoardResponseDto> response = boardService.getMyBoardList();
         ResultResponse result = ResultResponse.of(ResultCode.GET_BOARD_LIST_SUCCESS, response);

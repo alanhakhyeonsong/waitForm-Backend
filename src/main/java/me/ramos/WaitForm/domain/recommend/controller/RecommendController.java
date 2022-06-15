@@ -20,7 +20,7 @@ import java.util.List;
 
 @Controller
 @RequiredArgsConstructor
-@RequestMapping("/recommend")
+@RequestMapping("/recommends")
 public class RecommendController {
 
     private final RecommendService recommendService;

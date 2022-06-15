@@ -48,9 +48,9 @@ Backend 빌드/배포는 다음과 같습니다.
 
 
 ## API Docs
-![](https://velog.velcdn.com/images/songs4805/post/d6a34863-d3ea-47e8-9ebd-8b7698654b2b/image.png)
-![](https://velog.velcdn.com/images/songs4805/post/013b1a8a-74ac-4635-ae58-117c8b354c60/image.png)
-![](https://velog.velcdn.com/images/songs4805/post/89f3b713-73bb-4da1-8fab-51341f0b9af8/image.png)
+![](https://velog.velcdn.com/images/songs4805/post/c17b0b69-5da6-4b56-972f-28cc10893827/image.png)
+![](https://velog.velcdn.com/images/songs4805/post/b35a3456-b5e0-452c-bc3b-6aec05ce3fac/image.png)
+![](https://velog.velcdn.com/images/songs4805/post/6a0332ed-97fb-4ceb-9e95-d3da26dfbc61/image.png)
 
 # 작업 내역
 [Backend 작업 내역은 다음에서 확인할 수 있습니다.](https://github.com/ALGO-LEARN/waitForm/issues?q=Backend)
