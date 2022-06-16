@@ -44,7 +44,7 @@ Backend 빌드/배포는 다음과 같습니다.
 ![](https://velog.velcdn.com/images/songs4805/post/7f31dcf4-6cee-45bb-99b7-2d1f2aa849f6/image.png)
 
 ## ER Diagram
-![](https://velog.velcdn.com/images/songs4805/post/f28411ea-27f2-47e0-b0aa-2408a9bab4e9/image.png)
+![](https://velog.velcdn.com/images/songs4805/post/503d4bef-f667-4775-8117-491f1697445f/image.png)
 
 
 ## API Docs
