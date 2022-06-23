@@ -11,7 +11,6 @@ import me.ramos.WaitForm.domain.member.exception.MemberEmailAlreadyExistExceptio
 import me.ramos.WaitForm.domain.member.exception.MemberNicknameAlreadyExistException;
 import me.ramos.WaitForm.domain.member.repository.MemberRepository;
 import me.ramos.WaitForm.domain.member.repository.RefreshTokenRepository;
-import me.ramos.WaitForm.global.config.firebase.FirebaseService;
 import me.ramos.WaitForm.global.config.jwt.TokenProvider;
 import me.ramos.WaitForm.global.config.jwt.dto.TokenDto;
 import me.ramos.WaitForm.global.config.jwt.dto.TokenRequestDto;
@@ -33,7 +32,6 @@ public class AuthService {
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
     private final TokenProvider tokenProvider;
     private final RefreshTokenRepository refreshTokenRepository;
-    private final FirebaseService firebaseService;
 
     @Transactional
     public MemberResponseDto signup(MemberRegisterRequestDto memberRegisterRequestDto) throws Exception {
@@ -49,11 +47,6 @@ public class AuthService {
         String encryptedPassword = bCryptPasswordEncoder.encode(member.getPassword());
         member.setEncryptedPassword(encryptedPassword);
         Member save = memberRepository.save(member);
-        if (save.getId() > 500) {
-            me.ramos.WaitForm.global.config.firebase.Member firebase = new me.ramos.WaitForm.global.config.firebase.Member();
-            firebase.setId(save.getId());
-            firebaseService.insertMember(firebase);
-        }
 
         return MemberResponseDto.of(save);
     }
@@ -70,7 +63,7 @@ public class AuthService {
 
         // RefreshToken 저장
         RefreshToken refreshToken = RefreshToken.builder()
-                .key(authentication.getName())
+                .master(authentication.getName())
                 .value(tokenDto.getRefreshToken())
                 .build();
 
@@ -91,7 +84,7 @@ public class AuthService {
         Authentication authentication = tokenProvider.getAuthentication(tokenRequestDto.getAccessToken());
 
         // 저장소에서 Member ID를 기반으로 Refresh Token 가져오기
-        RefreshToken refreshToken = refreshTokenRepository.findByKey(authentication.getName())
+        RefreshToken refreshToken = refreshTokenRepository.findByMaster(authentication.getName())
                 .orElseThrow(MemberAlreadyLogoutException::new);
 
         // Refresh Token 검증
@@ -119,7 +112,7 @@ public class AuthService {
 
         final String memberId = SecurityContextHolder.getContext().getAuthentication().getName();
         // InvalidJwtException Customizing 해야함
-        RefreshToken refreshToken = refreshTokenRepository.findByKey(memberId).orElseThrow(RuntimeException::new);
+        RefreshToken refreshToken = refreshTokenRepository.findByMaster(memberId).orElseThrow(RuntimeException::new);
         refreshTokenRepository.delete(refreshToken);
     }
 }

@@ -16,7 +16,7 @@ import static me.ramos.WaitForm.global.result.ResultCode.FIND_BOARD_LIKE_SUCCESS
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/likes")
+@RequestMapping("/like")
 public class BoardLikeController {
 
     private final BoardService boardService;
@@ -43,7 +43,7 @@ public class BoardLikeController {
                     @ApiResponse(responseCode = "404", description = "해당 게시물에 달린 좋아요가 없습니다.")
             }
     )
-    @GetMapping("/me")
+    @GetMapping("/me/list")
     public ResponseEntity<ResultResponse> getMyLikes() {
         List<BoardLikeResponseDto> response = boardService.getMyLikes();
 
