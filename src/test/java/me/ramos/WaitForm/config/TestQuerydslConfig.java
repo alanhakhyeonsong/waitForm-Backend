@@ -1,4 +1,4 @@
-package me.ramos.WaitForm;
+package me.ramos.WaitForm.config;
 
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import org.springframework.boot.test.context.TestConfiguration;
@@ -8,7 +8,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
 @TestConfiguration
-public class TestConfig {
+public class TestQuerydslConfig {
 
     @PersistenceContext
     private EntityManager entityManager;
