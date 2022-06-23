@@ -16,9 +16,10 @@ import org.springframework.transaction.annotation.Transactional;
 public class MemberService {
 
     private final MemberRepository memberRepository;
+    private final SecurityUtil securityUtil;
 
     public MemberResponseDto getMyInfo() {
-        Long currentMemberId = SecurityUtil.getCurrentMemberId();
+        Long currentMemberId = securityUtil.getCurrentMemberId();
         log.info("회원 PK값: [{}]", currentMemberId);
 
         return memberRepository.findById(currentMemberId)

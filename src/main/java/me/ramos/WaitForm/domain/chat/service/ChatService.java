@@ -36,11 +36,12 @@ public class ChatService {
     private final RoomMemberRepository roomMemberRepository;
     private final MemberRepository memberRepository;
     private final SimpMessagingTemplate messagingTemplate;
+    private final SecurityUtil securityUtil;
 
     // 채팅방 생성
     @Transactional
     public ChatRoomCreateResponse createRoom(List<String> nicknames) {
-        final Long memberId = SecurityUtil.getCurrentMemberId();
+        final Long memberId = securityUtil.getCurrentMemberId();
         final Member inviter = memberRepository.findById(memberId).orElseThrow(MemberNotFoundException::new);
         nicknames.add(inviter.getNickname());
         final List<Member> members = memberRepository.findAllByNicknameIn(nicknames);
@@ -89,7 +90,7 @@ public class ChatService {
 
     // 채팅방 목록 조회
     public List<JoinRoomDto> getJoinRooms() {
-        final Long memberId = SecurityUtil.getCurrentMemberId();
+        final Long memberId = securityUtil.getCurrentMemberId();
         final Member member = memberRepository.findById(memberId).orElseThrow(MemberNotFoundException::new);
 
         List<JoinRoomDto> results = joinRoomRepository.findAllJoinRoomDtoByMemberId(member.getId());
@@ -143,7 +144,7 @@ public class ChatService {
 
     // 메시지 조회
     public List<MessageDto> getAllMessages(Long roomId) {
-        final Long memberId = SecurityUtil.getCurrentMemberId();
+        final Long memberId = securityUtil.getCurrentMemberId();
 
         return messageRepository.findAllMessageDtoByMemberIdAndRoomId(memberId, roomId);
     }

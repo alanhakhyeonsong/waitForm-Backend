@@ -31,11 +31,12 @@ public class BoardService {
     private final BoardRepository boardRepository;
     private final MemberRepository memberRepository;
     private final BoardLikeRepository boardLikeRepository;
+    private final SecurityUtil securityUtil;
 
     // 등록
     @Transactional
     public BoardResponseDto upload(BoardEnrollRequestDto request) {
-        final Long memberId = SecurityUtil.getCurrentMemberId();
+        final Long memberId = securityUtil.getCurrentMemberId();
         Member member = memberRepository.findById(memberId).orElseThrow(MemberNotFoundException::new);
         Board board = Board.builder()
                 .title(request.getTitle())
@@ -50,7 +51,7 @@ public class BoardService {
     // 삭제
     @Transactional
     public void delete(Long boardId) {
-        final Long loginMemberId = SecurityUtil.getCurrentMemberId();
+        final Long loginMemberId = securityUtil.getCurrentMemberId();
         Board board = boardRepository.findById(boardId).orElseThrow(BoardNotFoundException::new);
         if (!board.getMember().getId().equals(loginMemberId)) {
             throw new NoAuthorityException();
@@ -60,7 +61,7 @@ public class BoardService {
 
     // 본인이 쓴 글 목록 조회
     public List<BoardResponseDto> getMyBoardList() {
-        final Long memberId = SecurityUtil.getCurrentMemberId();
+        final Long memberId = securityUtil.getCurrentMemberId();
 
         List<BoardResponseDto> list = boardRepository.findAllByMemberId(memberId);
         if (list.size() == 0) {
@@ -80,7 +81,7 @@ public class BoardService {
     @Transactional
     public BoardLikeResponseDto likeBoard(Long boardId) {
         final Board board = boardRepository.findWithMemberById(boardId).orElseThrow(BoardNotFoundException::new);
-        final Long memberId = SecurityUtil.getCurrentMemberId();
+        final Long memberId = securityUtil.getCurrentMemberId();
         Member loginMember = memberRepository.findById(memberId).orElseThrow(MemberNotFoundException::new);
 
         if (boardLikeRepository.findByMemberAndBoard(loginMember, board).isPresent()) {
@@ -103,7 +104,7 @@ public class BoardService {
 
     // 자신이 누른 좋아요 목록 조회
     public List<BoardLikeResponseDto> getMyLikes() {
-        final Long memberId = SecurityUtil.getCurrentMemberId();
+        final Long memberId = securityUtil.getCurrentMemberId();
         List<BoardLikeResponseDto> list = boardLikeRepository.findAllByMemberId(memberId);
 
         if (list.size() == 0) {

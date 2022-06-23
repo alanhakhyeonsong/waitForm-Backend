@@ -27,6 +27,7 @@ public class RecommendService {
     private final RecommendRepository recommendRepository;
     private final MemberRepository memberRepository;
     private final BoardRepository boardRepository;
+    private final SecurityUtil securityUtil;
 
     // 저장
     @Transactional
@@ -42,7 +43,7 @@ public class RecommendService {
 
     // 멤버 id로 조회
     public List<RecommendResponse> getMyRecommends() {
-        final Long memberId = SecurityUtil.getCurrentMemberId();
+        final Long memberId = securityUtil.getCurrentMemberId();
         List<RecommendResponse> list = recommendRepository.findAllByMemberId(memberId);
 
         if (list.size() == 0) {
