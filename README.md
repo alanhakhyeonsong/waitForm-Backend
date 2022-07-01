@@ -55,6 +55,8 @@ Backend 빌드/배포는 다음과 같습니다.
 # 작업 내역
 [Backend 작업 내역은 다음에서 확인할 수 있습니다.](https://github.com/ALGO-LEARN/waitForm/issues?q=Backend)
 
+// **2022년 6월 18일 이후 commit 내역: Unit Test 추가 및 수정 하였습니다.**
+
 ![](https://velog.velcdn.com/images/songs4805/post/2b60d2de-dddf-421d-a8ff-ce2834700739/image.png)
 
 ![](https://velog.velcdn.com/images/songs4805/post/57cf0c41-28bf-4b91-9be8-7925eadaa8a0/image.png)
